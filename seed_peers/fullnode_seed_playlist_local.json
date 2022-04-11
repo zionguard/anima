@@ -1,8 +1,11 @@
-{
-  "nodes": [
-    {
-      "note": "Local",
-      "url": "http://0.0.0.0:8080"
-    }
-  ]
-}
+[
+  {
+    "name": "Aptos",
+    "nodes": [
+      {
+        "note": "Local",
+        "url": "http://0.0.0.0:8080"
+      }
+    ]
+  }
+]

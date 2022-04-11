@@ -1,31 +1,30 @@
-//! tauriWallet configs file
+//! app configs file
 
 use std::path::PathBuf;
 use anyhow::Error;
 use dirs;
 use reqwest::Url;
 
-use crate::app_cfg::{parse_toml, AppCfg};
+use crate::app_cfg::{parse_toml, AppCfg, APP_HOME, CONFIG_FILE};
 use crate::key_manager;
 
-static APP_CONFIG_FILE: &str = "tauriWallet.toml";
 static ACCOUNTS_DB_FILE: &str = "accounts.json";
 
 // get the config path for files
 pub fn default_config_path() -> PathBuf {
   dirs::home_dir()
     .unwrap()
-    .join(".tauriWallet")
-    .join(APP_CONFIG_FILE)
+    .join(APP_HOME)
+    .join(CONFIG_FILE)
 }
 
-/// Get all the tauriWallet configs. For tx sending and upstream nodes
+/// Get all the app configs. For tx sending and upstream nodes
 pub fn get_cfg() -> Result<AppCfg, Error> {
   parse_toml(None) // gets default toml path.
 }
 
 pub fn default_accounts_db_path() -> PathBuf {
-  dirs::home_dir().unwrap().join(".tauriWallet").join(ACCOUNTS_DB_FILE)
+  dirs::home_dir().unwrap().join(APP_HOME).join(ACCOUNTS_DB_FILE)
 }
 
 /// All the parameters needed for a client transaction.

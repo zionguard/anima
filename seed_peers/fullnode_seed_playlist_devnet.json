@@ -1,8 +1,23 @@
-{
-  "nodes": [
-    {
-      "note": "Alice",
-      "url": "http://0.0.0.0:8080"
-    }
-  ]
-}
+[
+  {
+    "name": "Aptos",
+    "nodes": [
+      {
+        "note": "rando a",
+        "url": "http://141.164.40.99:8080"
+      },
+      {
+        "note": "rando b",
+        "url": "http://135.181.180.29:8080"
+      },
+      {
+        "note": "rando c",
+        "url": "http://23.88.60.69:8080"
+      },
+      {
+        "note": "rando d",
+        "url": "http://141.164.44.175:8080"
+      }
+    ]
+  }
+]

@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
 import { loadAccounts } from "./accountActions";
 import { isInit } from "./accounts";
-import { refreshWaypoint } from "./networks";
+import { getLedgerInfo } from "./networks";
 
 export const walletTick = async () => {
   console.log("walletTick");
@@ -11,7 +11,7 @@ export const walletTick = async () => {
   await loadAccounts()
 
   if (get(isInit)) {
-    await refreshWaypoint() 
+    await getLedgerInfo() 
   }
 
 }
