@@ -1,13 +1,13 @@
 <script>
   import { onDestroy, onMount } from "svelte";
-  import { Networks, network_profile } from "../../networks";
+  import { NetworkID, network_profile } from "../../networks";
 
   let isTestNet = false;
   let unsubs;
 
   onMount(async () => {
     unsubs = network_profile.subscribe((network) => {
-      isTestNet = network.chain_id == Networks.Testnet;
+      isTestNet = network.chain_id == NetworkID.Testnet;
     });
   });
 

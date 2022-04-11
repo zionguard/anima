@@ -14,7 +14,6 @@ pub mod key_manager;
 pub mod rpc_playlist;
 pub mod wallet_error;
 pub mod api;
-pub mod mnemonic;
 pub mod keys;
 
 use crate::commands::*;
@@ -32,9 +31,9 @@ fn main() {
 
   let menu = Menu::new()
     .add_submenu(Submenu::new(
-      "TauriWallet",
+      "Anima Wallet",
       Menu::new()
-        // .add_native_item(MenuItem::About("TauriWallet".to_string()))
+        // .add_native_item(MenuItem::About("Anima".to_string()))
         .add_native_item(MenuItem::Quit),
     ))
     .add_submenu(Submenu::new("Edit", {
@@ -73,6 +72,7 @@ fn main() {
       refresh_waypoint,
       toggle_network,
       // Queries
+      query_ledger_info,
       query_balance,
       // Transactions
       get_env,

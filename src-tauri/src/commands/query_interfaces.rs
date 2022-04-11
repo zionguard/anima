@@ -1,7 +1,13 @@
 //! query the chain
+use aptos_api_types::{LedgerInfo, MoveResource};
 use move_core_types::account_address::AccountAddress;
 
-use crate::{wallet_error::WalletError, api::query};
+use crate::{wallet_error::WalletError, api::queries::{self, get_ledger_info}};
+
+#[tauri::command(async)]
+pub async fn query_ledger_info() -> Result<LedgerInfo, WalletError> {
+  get_ledger_info().await.map_err(|e| WalletError::from(e))
+}
 
 #[tauri::command(async)]
 pub fn query_balance(account: AccountAddress) -> Result<u64, WalletError> {
@@ -11,7 +17,7 @@ pub fn query_balance(account: AccountAddress) -> Result<u64, WalletError> {
 // NOTE: change String to Type
 pub fn get_balance(_account: &AccountAddress) -> Result<u64, WalletError> {
   // Mock balance
-  Ok(100)
+  Ok(1000000)
 }
 
 // NOTE: Create own event view
@@ -51,9 +57,11 @@ pub fn get_events(_account: String) -> Result<Vec<EventView>, WalletError> {
 }
 
 #[tauri::command(async)]
-pub async fn get_root_account() -> Result<String, String> {
-  match query::get_association_state().await {
-    Ok(r) => Ok(r.to_string()),
+pub async fn get_root_account() -> Result<Vec<MoveResource>, String> {
+  match queries::get_association_state().await {
+    Ok(r) => {
+      Ok(r)
+    },
     Err(e) => Err(e.to_string()),
 }
 }

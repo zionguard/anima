@@ -13,9 +13,11 @@ use std::{
   path::PathBuf,
 };
 
+use crate::configs_network::NetworkID;
 
-static APP_HOME: &str = ".tauriWallet";
-static CONFIG_FILE: &str = "tauriWallet.toml";
+
+pub static APP_HOME: &str = ".anima_canary";
+pub static CONFIG_FILE: &str = "anima_canary.toml";
 
 /// App Configuration
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -34,11 +36,9 @@ fn default_path() -> PathBuf {
 /// Get a AppCfg object from toml file
 pub fn parse_toml(path: Option<PathBuf>) -> Result<AppCfg, Error> {
   let cfg_path = path.unwrap_or(default_path());
-
   let mut toml_buf = "".to_string();
   let mut file = File::open(&cfg_path)?;
   file.read_to_string(&mut toml_buf)?;
-
   let cfg: AppCfg = toml::from_str(&toml_buf)?;
   Ok(cfg)
 }
@@ -97,7 +97,7 @@ impl Default for Workspace {
 // #[serde(deny_unknown_fields)]
 pub struct ChainInfo {
   /// Chain that this work is being committed to
-  pub chain_id: String,
+  pub chain_id: NetworkID,
 
   /// Epoch from which the node started syncing
   pub base_epoch: Option<u64>,
@@ -110,7 +110,7 @@ pub struct ChainInfo {
 impl Default for ChainInfo {
   fn default() -> Self {
     Self {
-      chain_id: "1".to_string(),
+      chain_id: NetworkID::Devnet,
       base_epoch: Some(0),
       // Mock Waypoint.
       base_waypoint: Some("0:0".to_owned()),
